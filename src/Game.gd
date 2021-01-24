@@ -14,6 +14,7 @@ onready var Cell = preload("res://src/Cell.tscn")
 
 onready var grid: GridContainer = $Grid
 
+var grid_rect = Rect2(Vector2(0, 0), Vector2(CELL_COLS, CELL_ROWS))
 var rng = RandomNumberGenerator.new()
 var cells = []
 
@@ -57,6 +58,9 @@ func _on_Cell_dropped(id, dir):
 	var caller_pos = get_cell_position_by_id(id)
 	var target_pos = caller_pos + dir
 	var target_id = get_cell_id_by_position(target_pos)
+	
+	if not grid_rect.has_point(target_pos):
+		return
 	
 	# switch values
 	var old = cells[target_id].value

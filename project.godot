@@ -26,7 +26,7 @@ window/size/height=346
 window/size/test_width=692
 window/size/test_height=692
 window/stretch/mode="2d"
-window/stretch/aspect="keep_height"
+window/stretch/aspect="expand"
 
 [importer_defaults]
 
