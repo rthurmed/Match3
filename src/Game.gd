@@ -85,11 +85,13 @@ func check_possible_sequences(id):
 		sequence = sequence_v
 	
 	if sequence.size() < SEQUENCE_MIN:
-		return
+		return false
 	
 	clean_sequence(sequence)
 	pull_cells_down()
 	fill_empty_cells()
+	
+	return true
 
 
 func search_linear_sequence(cell_id, origin, step):
@@ -150,5 +152,8 @@ func _on_Cell_dropped(id, dir):
 	
 	switch_values(id, target_id)
 	
-	check_possible_sequences(id)
-	check_possible_sequences(target_id)
+	var updated1 = check_possible_sequences(id)
+	var updated2 = check_possible_sequences(target_id)
+	
+	if updated1 == updated2 and updated1 == false:
+		switch_values(id, target_id)
