@@ -66,12 +66,22 @@ func build_grid():
 		cell.connect("dropped", self, "_on_Cell_dropped")
 		cell.connect("finished_animation", self, "_on_Cell_finished_animation")
 		
-		cell.value = get_random_cell_value()
 		cell.id = i
 		
 		grid.add_child(cell, true)
 		cells.insert(i, cell)
 		cell_blocked.insert(i, false)
+	
+	# Generate values
+	var sequence_count = 1
+	while(sequence_count > 0):
+		for id in range(0, CELL_TOTAL):
+			cells[id].set_value(get_random_cell_value())
+		sequence_count = search_all_sequences()
+	
+	# Reset blocked
+	for id in range(0, CELL_TOTAL):
+		cell_blocked[id] = false
 
 
 func get_random_cell_value():
@@ -161,11 +171,7 @@ func pull_down_cells():
 				# Adds one unit of falling
 				# If one is over multiple empty cells, it will fall many units
 				falling[top] += Vector2.DOWN
-#				cells[top].highlight = true
 			top += CellMove.UP
-	
-#	for id in range(0, CELL_TOTAL):
-#		cells[id].get_node('IdLabel').text = str(get_cell_position_by_id(id) + falling[id])
 	
 	# Apply animations with move_to
 	for i in range(0, CELL_TOTAL):
@@ -177,14 +183,21 @@ func pull_down_cells():
 			var new_id = get_cell_id_by_position(new_pos)
 			switch_values(id, new_id)
 			
-#			cells[new_id].highlight = true
-			
 			# Animate
-			var initial_sprite_pos = falling[id] * -1 * (CELL_SPRITE_SIZE + COLUMN_GAP)
-			var end_sprite_pos = Vector2.ZERO
+			var fall = falling[id] * -1 * (CELL_SPRITE_SIZE + COLUMN_GAP)
 			
-#			cells[id].get_node('IdLabel').text = str(old_pos)
-			cells[new_id].move_sprite_to(initial_sprite_pos, end_sprite_pos)
+#			cells[id].get_node('IdLabel').text = str(falling[id])
+			cells[new_id].move_sprite_from_to(fall)
+	
+	# Fill new empty spaces
+	for id in range(0, CELL_TOTAL):
+		if cells[id].value == CELL_EMPTY_VALUE:
+			var pos = get_cell_position_by_id(id)
+			var fall = (pos + Vector2.DOWN) * -1 * (CELL_SPRITE_SIZE + COLUMN_GAP)
+			fall.x = 0
+			
+			cells[id].set_value(get_random_cell_value())
+			cells[id].move_sprite_from_to(fall)
 
 
 func _on_Cell_finished_animation(id):
