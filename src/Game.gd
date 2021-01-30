@@ -102,6 +102,13 @@ func is_id_valid(id):
 	return id >= 0 and id < CELL_TOTAL
 
 
+func has_any_blocked_cells():
+	for i in cell_blocked:
+		if i == true:
+			return true
+	return false
+
+
 func switch_values(id1, id2):
 	var old_value = cells[id2].value
 	cells[id2].set_value(cells[id1].value)
@@ -156,65 +163,59 @@ func lock_sequence(sequence):
 
 
 func pull_down_cells():
-	var falling = [] # Array to represent how much a cell value should fall
-	var empty = []   # List of empty cells
+	var col_falling = [] # How much cells of a column should fall
 	
-	for id in range(0, CELL_TOTAL):
-		falling.insert(id, Vector2.ZERO)
-		if cell_blocked[id]: empty.append(id)
+	# Calculate the fall force to every column
+	for x in range(0, CELL_COLS):
+		col_falling.insert(x, 0)
+		for y in range(0, CELL_ROWS):
+			var id = x + CellMove.DOWN * y
+			if cell_blocked[id]:
+				col_falling[x] += 1
 	
-	# Check all cells above an empty cell
-	for id in empty:
-		var top = id + CellMove.UP
-		while is_id_valid(top):
-			if not cells[top].value == CELL_EMPTY_VALUE:
-				# Adds one unit of falling
-				# If one is over multiple empty cells, it will fall many units
-				falling[top] += Vector2.DOWN
-			top += CellMove.UP
+	# Apply force
+	for x in range(0, CELL_COLS):
+		var fall_power = col_falling[x]
+		if fall_power > 0:
+			for yi in range(0, CELL_ROWS):
+				# Read from the bottom of the column
+				var y = (CELL_ROWS - yi) - 1
+				var id = x + CellMove.DOWN * y
+				var new_id = x + CellMove.DOWN * (y + fall_power)
+				var fall = Vector2(0, fall_power * -1) * (CELL_SPRITE_SIZE + COLUMN_GAP)
+				
+				# Only switch if the target position is empty
+				if is_id_valid(new_id) and cells[new_id].value == CELL_EMPTY_VALUE:
+					switch_values(id, new_id)
+					cells[new_id].move_sprite_from_to(fall)
 	
-	# Apply animations with move_to
-	for i in range(0, CELL_TOTAL):
-		var id = CELL_TOTAL - i - 1
-		if not falling[id] == Vector2.ZERO:
-			# Switch
-			var old_pos = get_cell_position_by_id(id)
-			var new_pos = old_pos + falling[id]
-			var new_id = get_cell_id_by_position(new_pos)
-			switch_values(id, new_id)
-			
-			# Animate
-			var fall = falling[id] * -1 * (CELL_SPRITE_SIZE + COLUMN_GAP)
-			
-#			cells[id].get_node('IdLabel').text = str(falling[id])
-			cells[new_id].move_sprite_from_to(fall)
-	
-	# Fill new empty spaces
-	for id in range(0, CELL_TOTAL):
-		if cells[id].value == CELL_EMPTY_VALUE:
-			var pos = get_cell_position_by_id(id)
-			var fall = (pos + Vector2.DOWN) * -1 * (CELL_SPRITE_SIZE + COLUMN_GAP)
-			fall.x = 0
-			
-			cells[id].set_value(get_random_cell_value())
-			cells[id].move_sprite_from_to(fall)
+	# Fill the empty ones
+	for x in range(0, CELL_COLS):
+		var fall_power = col_falling[x]
+		if fall_power > 0:
+			for y in range(0, CELL_ROWS):
+				var id = x + CellMove.DOWN * y
+				var fall = Vector2(0, fall_power * -1) * (CELL_SPRITE_SIZE + COLUMN_GAP)
+				
+				if cells[id].value == CELL_EMPTY_VALUE:
+					cells[id].set_value(get_random_cell_value())
+					cells[id].move_sprite_from_to(fall)
 
 
 func _on_Cell_finished_animation(id):
 	cell_blocked[id] = false
-
+	if not has_any_blocked_cells():
+		var updated = search_all_sequences()
+		if updated > 0:
+			pull_down_cells()
 
 func _on_Cell_dropped(id, dir):
 	var caller_pos = get_cell_position_by_id(id)
 	var target_pos = caller_pos + dir
 	var target_id = get_cell_id_by_position(target_pos)
 	
-	# Ignores input if has any blocked cells
-	for i in cell_blocked:
-		if i == true:
-			return
-	
-	if not grid_rect.has_point(target_pos):
+	# Ignores input if target is outside or has any blocked cells
+	if not grid_rect.has_point(target_pos) or has_any_blocked_cells():
 		return
 	
 	switch_values(id, target_id)

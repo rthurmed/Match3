@@ -71,7 +71,7 @@ func update_sprite():
 
 
 func move_sprite_from_to(from: Vector2, to: Vector2 = Vector2.ZERO):
-	var duration = (to.y - from.y) / 64
+	var duration = (to.y - from.y) * 0.8 / 64
 	# warning-ignore:return_value_discarded
 	tween.interpolate_property(self, "follow", from, to, duration, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	# warning-ignore:return_value_discarded

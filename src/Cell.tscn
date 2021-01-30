@@ -43,6 +43,7 @@ region_rect = Rect2( 0, 0, 32, 32 )
 anims/die = SubResource( 1 )
 
 [node name="IdLabel" type="Label" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 text = "11"
