@@ -41,7 +41,7 @@ func _ready():
 
 
 func _process(_delta):
-	sprite.z_index = 100 if selected else 1
+	sprite.z_index = 200 if selected else 1
 	sprite.scale = Vector2.ONE * (1.25 if selected else 1.0)
 	
 	if tween.is_active():

@@ -163,6 +163,9 @@ func lock_sequence(sequence):
 
 
 func pull_down_cells():
+	# If is pulling down usually means sequences have been formed
+	$Audio/Pop.play()
+	
 	var col_falling = [] # How much cells of a column should fall
 	
 	# Calculate the fall force to every column
@@ -209,6 +212,7 @@ func _on_Cell_finished_animation(id):
 		if updated > 0:
 			pull_down_cells()
 
+
 func _on_Cell_dropped(id, dir):
 	var caller_pos = get_cell_position_by_id(id)
 	var target_pos = caller_pos + dir
@@ -228,4 +232,3 @@ func _on_Cell_dropped(id, dir):
 		return
 	
 	pull_down_cells()
-	
