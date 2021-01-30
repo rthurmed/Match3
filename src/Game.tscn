@@ -1,13 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/leaves1.tres" type="Texture" id=2]
+[ext_resource path="res://assets/leaves2.tres" type="Texture" id=3]
+[ext_resource path="res://assets/leaves3.tres" type="Texture" id=4]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 182, 182 )
-current = true
 
 [node name="Grid" type="GridContainer" parent="."]
 margin_left = 30.0
@@ -18,3 +17,238 @@ columns = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 182, 182 )
+current = true
+
+[node name="Decoration" type="Node2D" parent="Camera2D"]
+z_index = 100
+
+[node name="Flower2" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -171, -153 )
+texture = ExtResource( 3 )
+
+[node name="Leaf3" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -90, -173 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf5" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -12, -195 )
+rotation = -8.74228e-08
+texture = ExtResource( 2 )
+
+[node name="Leaf6" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 33, -179 )
+rotation = -8.74228e-08
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf7" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 56, -191 )
+rotation = -8.74228e-08
+texture = ExtResource( 2 )
+
+[node name="Leaf8" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -178, -125 )
+rotation = -8.74228e-08
+texture = ExtResource( 2 )
+
+[node name="Leaf9" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -191, -88 )
+rotation = -8.74228e-08
+texture = ExtResource( 2 )
+
+[node name="Leaf11" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 186, -161 )
+texture = ExtResource( 2 )
+
+[node name="Leaf10" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 160, -181 )
+rotation = -8.74228e-08
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf12" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 121, -193 )
+rotation = -8.74228e-08
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf4" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -38, -185 )
+rotation = -3.14159
+scale = Vector2( -1, -1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf1" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -124, -180 )
+texture = ExtResource( 2 )
+
+[node name="Leaf2" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -157, -178 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf13" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -181, 27 )
+texture = ExtResource( 2 )
+
+[node name="Leaf15" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 186, 31 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf14" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 179, 11 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf16" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -192, 46 )
+texture = ExtResource( 2 )
+
+[node name="Leaf17" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -185, 97 )
+texture = ExtResource( 2 )
+
+[node name="Leaf18" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -141, 161 )
+texture = ExtResource( 2 )
+
+[node name="Leaf19" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -181, 147 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Flower1" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -59, -173 )
+texture = ExtResource( 3 )
+
+[node name="Flower5" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -158, 139 )
+texture = ExtResource( 3 )
+
+[node name="Leaf25" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -51, 176 )
+texture = ExtResource( 2 )
+
+[node name="Leaf20" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -179, 173 )
+texture = ExtResource( 2 )
+
+[node name="Leaf21" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -80, 166 )
+texture = ExtResource( 2 )
+
+[node name="Leaf22" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -114, 171 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Leaf23" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -70, 152 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( -10, 13 )
+
+[node name="Leaf24" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -70, 152 )
+texture = ExtResource( 2 )
+offset = Vector2( 41, 17 )
+
+[node name="Leaf27" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 73, 155 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( -10, 13 )
+
+[node name="Leaf26" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 73, 155 )
+texture = ExtResource( 2 )
+offset = Vector2( 41, 17 )
+
+[node name="Leaf29" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -11, 153 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( -10, 13 )
+
+[node name="Leaf28" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -8, 152 )
+texture = ExtResource( 2 )
+offset = Vector2( 41, 17 )
+
+[node name="Leaf32" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 144, 153 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( -10, 13 )
+
+[node name="Leaf31" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 147, 152 )
+texture = ExtResource( 2 )
+offset = Vector2( 41, 17 )
+
+[node name="Leaf30" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 165, 129 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 2 )
+offset = Vector2( -10, 13 )
+
+[node name="ThinLeaf1" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -171, -44 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf2" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -178, -25 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf3" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -187, 2 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf4" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 169, -112 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf5" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 174, -88 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf6" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 184, -63 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf7" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 178, 71 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="ThinLeaf8" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 185, 96 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="Flower3" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -184, -72 )
+texture = ExtResource( 3 )
+
+[node name="Flower6" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( -46, 154 )
+texture = ExtResource( 3 )
+
+[node name="Flower4" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 177, -12 )
+texture = ExtResource( 3 )
+
+[node name="Flower7" type="Sprite" parent="Camera2D/Decoration"]
+position = Vector2( 55, 161 )
+texture = ExtResource( 3 )
