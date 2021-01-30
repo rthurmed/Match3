@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
 [ext_resource path="res://assets/leaves1.tres" type="Texture" id=2]
 [ext_resource path="res://assets/leaves2.tres" type="Texture" id=3]
 [ext_resource path="res://assets/leaves3.tres" type="Texture" id=4]
 [ext_resource path="res://assets/sfx/pop.wav" type="AudioStream" id=5]
+[ext_resource path="res://src/Hand.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -258,3 +259,6 @@ texture = ExtResource( 3 )
 
 [node name="Pop" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 5 )
+
+[node name="Hand" parent="." instance=ExtResource( 6 )]
+z_index = 300
